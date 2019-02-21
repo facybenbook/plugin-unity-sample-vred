@@ -10,7 +10,6 @@ public class VariantsDisplay : MonoBehaviour {
     public RectTransform materialContent;
     public GameObject tranformSubContent;
     public GameObject toggle;
-    public GameObject text;
 
 
     private GameObject importedModel;

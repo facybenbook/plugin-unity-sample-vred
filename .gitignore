@@ -38,5 +38,7 @@ sysinfo.txt
 # Customs
 Assets/Plugins/
 Assets/Plugins.meta
-Assets/HDRenderPipelineAsset.asset
-Assets/HDRenderPipelineAsset.asset.meta
+Assets/Ignore/
+Assets/Ignore.meta
+Assets/3DModels/
+Assets/3DModels.meta
