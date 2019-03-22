@@ -13,7 +13,8 @@ public class VariantsDisplay : MonoBehaviour {
 
 
     private GameObject importedModel;
-    private PiXYZ.Plugin.Unity.VRED.VariantsManager variantsManager;
+    private VariantsManager variantsManager;
+
 
     void Start()
     {
