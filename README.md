@@ -19,4 +19,4 @@ Download the .unitypackage for your plugin version in Releases and import it in 
 
 Since 2019.1, PiXYZ is proud to manage VRED scenes import directly in Unity (more info soon in the documentation). This comes with a set of methods and components to handle variants and animations. This demo shows you how to use this API to list all model variants automatically, display them in a menu and select them at runtime.
 
-The menus are generated automatically and this demo will work with any VRED model imported with our 2019.1 PLUGIN for Unity.
+The menus are generated automatically so this demo will work with any VRED model imported with our 2019.1 PLUGIN for Unity.
