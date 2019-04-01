@@ -16,49 +16,46 @@ public class VariantsDisplay : MonoBehaviour {
     private VariantsManager variantsManager;
 
 
+    private class GenericKeyValue {
+
+        public object key;
+        public object value;
+
+        public void setKeyValue<T, U>(T k, U v) {key = k; value = v; }
+    }
+    Dictionary<Toggle, GenericKeyValue> dict = new Dictionary<Toggle, GenericKeyValue>();
+
     void Start()
     {
-        if (FindObjectsOfType<ImportedModel>().Length == 0) return;
+        if (FindObjectsOfType<ImportStamp>().Length == 0) { this.gameObject.SetActive(false); return; };
         importedModel = Importer.LatestModelImportedObject.gameObject;
-        if (importedModel == null) return;
+        if (importedModel == null) { this.gameObject.SetActive(false); return; };
         variantsManager = importedModel.GetComponentInChildren<VariantsManager>();
         if (variantsManager == null) { this.gameObject.SetActive(false); return; }
-        SetVariantsContent(materialContent);
-        SetVariantsContent(transformContent);
+        setVariantsContent<VariantsManager.MaterialSwitch, Material>(materialContent, variantsManager.MaterialSwitchList);
+        setVariantsContent<VariantsManager.TransformSwitch, TransformVariant>(transformContent, variantsManager.TransformSwitchList);
     }
 
-    // Set the variants contents (materials and transform)
-    // -> list the switches, their variants and creates subcontents with toggles
-    // -> adjust the size of the different contents
-    // -> create toggle groups and subscribe the toggles to the ToggleValueChanged
-    void SetVariantsContent(RectTransform variantsContent)
+    void setVariantsContent<T, U>(RectTransform variantsContent, List<T> switchList)
     {
-        List<string> switches = new List<string>();
-        if (variantsContent.Equals(transformContent)) {
-            switches = variantsManager.GetTransformSwitches();
-        } else if (variantsContent.Equals(materialContent)) {
-            switches = variantsManager.GetMaterialSwitches();
-        }
+        if (switchList.Count == 0) { variantsContent.transform.parent.parent.parent.gameObject.SetActive(false); return; }
         float offset = 4.0f;
         float bottom = 0.0f;
-        foreach (string switchName in switches) {
-            List<string> variants = new List<string>();
-            if (variantsContent.Equals(transformContent)) {
-                variants = variantsManager.GetTransformVariants(switchName);
-            } else if (variantsContent.Equals(materialContent)) {
-                variants = variantsManager.GetMaterialVariants(switchName);
-            }
-            if (variants.Count == 0) continue;
-            GameObject subContent = CreateSubContent(tranformSubContent, variantsContent, -offset, switchName);
-            subContent.name = switchName;
-            float size = InsertVariantsInContent(toggle, subContent.GetChildren()[0], variantsContent, variants);
+        foreach (var switchObject in switchList) {
+
+            var name = switchObject.GetFieldValue<string>("name");
+            List<U> variants = switchObject.GetFieldValue<List<U>>("variants");
+
+            GameObject subContent = CreateSubContent(tranformSubContent, variantsContent, -offset, name);
+            subContent.name = name;
+            float size = InsertVariantsInContent(toggle, subContent.GetChildren(false, false)[0], variantsContent, switchObject, variants);
 
             subContent.GetComponent<RectTransform>().sizeDelta = new Vector2(subContent.GetComponent<RectTransform>().sizeDelta[0], subContent.GetComponent<RectTransform>().rect.height + size);
             subContent.transform.localPosition = new Vector3(subContent.transform.localPosition.x, -subContent.GetComponent<RectTransform>().rect.height / 2.0f - offset, subContent.transform.localPosition.z);
             offset += subContent.GetComponent<RectTransform>().rect.height + 5.0f;
 
-            subContent.GetChildren()[0].GetComponent<ToggleGroup>().SetAllTogglesOff();
-            subContent.GetChildren()[0].transform.GetChild(0).GetComponent<Toggle>().isOn = true;
+            subContent.GetChildren(false, false)[0].GetComponent<ToggleGroup>().SetAllTogglesOff();
+            subContent.GetChildren(false, false)[0].transform.GetChild(0).GetComponent<Toggle>().isOn = true;
 
             bottom = -subContent.transform.localPosition.y + subContent.GetComponent<RectTransform>().sizeDelta[1] / 2;
         }
@@ -74,11 +71,11 @@ public class VariantsDisplay : MonoBehaviour {
         GameObject instance = Instantiate(content, variantsContent);
         instance.GetComponent<RectTransform>().localPosition = new Vector2(instance.transform.localPosition.x, yPosition);
 
-        GameObject switchTextObject = instance.GetChildren()[0];
+        GameObject switchTextObject = instance.GetChildren(false, false)[0];
         switchTextObject.GetComponent<Text>().text = t;
         switchTextObject.AddComponent<ToggleGroup>();
 
-        GameObject variantsToggleGroup = instance.GetChildren()[0];
+        GameObject variantsToggleGroup = instance.GetChildren(false, false)[0];
 
         return instance;
     }
@@ -87,31 +84,41 @@ public class VariantsDisplay : MonoBehaviour {
     // content: father of the toggle (subcontent created in CreateSubContent)
     // variantsContent: transform or materials content
     // variants: list of variants names corresponding to the subcontent
-    float InsertVariantsInContent(GameObject prefabToggle, GameObject content, RectTransform variantsContent, List<string> variants)
+    float InsertVariantsInContent<T, U>(GameObject prefabToggle, GameObject content, RectTransform variantsContent, T switchObject, List<U> variants)
     {
         float offset = 30.0f;
-        foreach (string variant in variants) {
+        foreach (var variant in variants) {
             GameObject m_Toggle = Instantiate(toggle, content.transform);
-            m_Toggle.name = variant;
-            m_Toggle.GetComponentInChildren<Text>().text = variant;
+
+            if (variant == null) { continue; }
+            string name = variant.GetPropertyValue<string>("name");
+            m_Toggle.name = name;
+            m_Toggle.GetComponentInChildren<Text>().text = name;
             m_Toggle.GetComponent<RectTransform>().localPosition = new Vector3(5, -offset);
             m_Toggle.GetComponent<Toggle>().group = content.GetComponent<ToggleGroup>();
             m_Toggle.GetComponent<Toggle>().onValueChanged.AddListener(delegate { ToggleValueChanged(m_Toggle.GetComponent<Toggle>(), variantsContent); });
 
+            GenericKeyValue switchVariant = new GenericKeyValue();
+            switchVariant.setKeyValue<T, U>(switchObject, variant);
+
+            dict.Add(m_Toggle.GetComponent<Toggle>(), switchVariant);
+            
             offset += m_Toggle.GetComponent<RectTransform>().rect.height;
         }
         return offset - 20;
     }
-
+    
     void ToggleValueChanged(Toggle m_Toggle, RectTransform variantsContent)
     {
         if (m_Toggle.isOn) {
-            if (variantsContent.Equals(transformContent)) {
-                variantsManager.SelectTransformVariant(m_Toggle.GetComponentInParent<Text>().text, m_Toggle.GetComponentInChildren<Text>().text);
-            } else if (variantsContent.Equals(materialContent)) {
-                variantsManager.SelectMaterialVariant(m_Toggle.GetComponentInParent<Text>().text, m_Toggle.GetComponentInChildren<Text>().text);
-            }
+            GenericKeyValue pair = dict[m_Toggle];
+            var switchObject = pair.key as VariantsManager.Switch;
+            var variant = pair.value;
+            switchObject.selectVariant(variant);
         }
     }
-
+    
+    
+    
+    
 }
