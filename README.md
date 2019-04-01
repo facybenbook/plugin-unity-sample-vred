@@ -3,6 +3,7 @@
 Automotive samples for [PiXYZ Plugin for Unity](https://www.pixyz-software.com/plugin/).
 
 ![Car Confifurator](/images/CarConfig.png)
+Aviera model not included
 
 ## How to use ?
 
@@ -16,5 +17,6 @@ Download the .unitypackage for your plugin version in Releases and import it in 
 
 ## Car Configurator Sample
 
+Since 2019.1, PiXYZ is proud to manage VRED scenes import directly in Unity (more info soon in the documentation). This comes with a set of methods and components to handle variants and animations. This demo shows you how to use this API to list all model variants automatically, display them in a menu and select them at runtime.
 
-
+The menus are generated automatically so this demo will work with any VRED model imported with our 2019.1 PLUGIN for Unity.
