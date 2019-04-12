@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using PiXYZ.Plugin.Unity;
 using PiXYZ.Plugin.Unity.VRED;
+using Unity;
 
 public class VariantsDisplay : MonoBehaviour {
 
@@ -99,7 +100,7 @@ public class VariantsDisplay : MonoBehaviour {
             m_Toggle.GetComponent<Toggle>().onValueChanged.AddListener(delegate { ToggleValueChanged(m_Toggle.GetComponent<Toggle>(), variantsContent); });
 
             GenericKeyValue switchVariant = new GenericKeyValue();
-            switchVariant.setKeyValue<T, U>(switchObject, variant);
+            switchVariant.setKeyValue<T, U> (switchObject, variant);
 
             dict.Add(m_Toggle.GetComponent<Toggle>(), switchVariant);
             
