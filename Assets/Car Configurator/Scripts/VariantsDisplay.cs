@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using PiXYZ.Plugin.Unity;
 using PiXYZ.Plugin.Unity.VRED;
-using Unity;
 
 public class VariantsDisplay : MonoBehaviour {
 
