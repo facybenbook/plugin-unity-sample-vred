@@ -27,11 +27,16 @@ public class VariantsDisplay : MonoBehaviour {
 
     void Start()
     {
+        // Get the last imported model and init GUI with its variants
         if (FindObjectsOfType<ImportStamp>().Length == 0) { this.gameObject.SetActive(false); return; };
         importedModel = Importer.LatestModelImportedObject.gameObject;
+
+        // Checks if imported model exists and has variants
         if (importedModel == null) { this.gameObject.SetActive(false); return; };
         variantsManager = importedModel.GetComponentInChildren<VariantsManager>();
         if (variantsManager == null) { this.gameObject.SetActive(false); return; }
+
+        // Init GUI
         setVariantsContent<VariantsManager.MaterialSwitch, Material>(materialContent, variantsManager.MaterialSwitchList);
         setVariantsContent<VariantsManager.TransformSwitch, TransformVariant>(transformContent, variantsManager.TransformSwitchList);
     }
