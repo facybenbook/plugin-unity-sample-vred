@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using PiXYZ.Plugin.Unity;
-using PiXYZ.Plugin.Unity.VRED;
+using PiXYZ.VRED;
+using PiXYZ.Import;
+using PiXYZ.Utils;
 
 public class VariantsDisplay : MonoBehaviour {
 
