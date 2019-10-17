@@ -3,7 +3,6 @@
 Automotive samples for [PiXYZ Plugin for Unity](https://www.pixyz-software.com/plugin/).
 
 ![Car Confifurator](/images/CarConfig.png)
-Aviera model not included
 
 ## How to use ?
 
@@ -11,9 +10,7 @@ Download the .unitypackage for your plugin version in Releases and import it in 
 
 ## Requirements
 
-* PiXYZ PLUGIN for Unity 2019.1
-* Unity 2018.3
-* High Definition Render Pipeline (**HDRP 4.9.0** or higher)
+* PiXYZ PLUGIN for Unity 2019.1 or higher
 
 ## Car Configurator Sample
 
