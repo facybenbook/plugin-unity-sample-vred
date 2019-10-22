@@ -19,7 +19,7 @@ The menus are generated automatically, this demo will work with any .vpb file im
 
 ## How to use
 
-### Clone project
+### **1. Clone**
 
 1. Clone this project and open it 
 2. Import the PiXYZ Plugin for Unity in the project
@@ -28,7 +28,7 @@ The menus are generated automatically, this demo will work with any .vpb file im
 
 ![](./images/measured_materials_library_1.png)
 
-### Import a .vpb file
+### **2. Import**
 
 1. Go to *PiXYZ > Import Model* and select a .vpb file. We will use the automotive sample from Autodesk (C:/ProgramData/Autodesk/VREDPro-xx.x/Examples/Automotive_Genesis.vpb)
 2. Please refer to the [documentation](https://www.pixyz-software.com/documentations/html/2019.1/plugin4unity/VREDImportGroup.html) for more information on the import settings. In this tutorial we'll prefer PiXYZ mesh over VRED one. The process will take more time but the number of triangles will be significantly less important for the same visual quality. If importing the Autodesk genesis sample, you can use the material mapping table at Assets/Genesis_material_library.csv. It will override existing materials with the ones from the Measured Materials Library. Choose a Maximum mesh quality and select "Use Materials in Resources".
@@ -37,7 +37,7 @@ The menus are generated automatically, this demo will work with any .vpb file im
 
 3. Check the root of the imported model, a Variants Manager component and a Variant Sets component should be placed there. They should match the switches and variant sets from your .vpb file
     
-### Stage the model
+### **3. Stage**
 
 1. Place the imported model under the rotating "platform" GameObject
 
@@ -49,7 +49,7 @@ The menus are generated automatically, this demo will work with any .vpb file im
 
 ![](./images/stage_2.png)
 
-### Run
+### **4. Run**
 
 The model rotates in the center of the scene and the doors are opening. Transform switches are listed in the left menu, material switches in the right one. Select the configuration you wish and enjoy!
 
