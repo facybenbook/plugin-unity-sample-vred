@@ -1,0 +1,50 @@
+﻿VRED material,Unity material,UV Size (Channel 0)
+Shadow,PlasticGrainy,500
+Plastic black,PlasticGrainy,500
+Paint black,PlasticGrainy,500
+Metallic silver dark,CarPaint_Black,500
+Carbon 2x,CarbonFiber,500
+Metallic black,CarPaint_Black,500
+Metallic blue fire,CarPaint_Mist,500
+Metallic chocolate,CarPaint_Taupe,500
+Metallic silver dark,MetalDark,500
+Paint white,CarPaint_Pearl,500
+Paint yellow,CarPaint_Yellow,500
+OCS Red Dark Pearl,CarPaint_DarkRed,500
+OCS Blue D,CarPaint_Blue,500
+OCS Silver B,CarPaint_Silver,500
+OCS Red Candy,CarPaint_Red,500
+Chrome,Chrome,500
+Dashboard black,PlasticGrainy,500
+Dashboard white,LeatherSmallGrain_White,500
+Dashboard red,LeatherSmallGrain_Red,500
+Leather black,LeatherSmallGrain_Black,500
+Leather white,LeatherSmallGrain_White,500
+Leather red,LeatherSmallGrain_Red,500
+Emissive_OFF,CarPaint_Silver,500
+Emissive White ON,LeatherSmallGrain_White,500
+Multipass_Surfboard,PlasticOpaque,500
+Plastic red dark structured,PlasticOpaque,500
+Metal black,CarPaint_Black,500
+Black,PlasticOpaque,
+Steel,Metal,500
+Cloth Linen Coarse,SuedeCoarse_Gray,500
+Anthrazit,PlasticOpaque,500
+Reflective black,CarPaint_Black,500
+Reflective white,CarPaint_Pearl,500
+Tire Rear,Rubber,500
+Plastic black structured,PlasticGrainy,500
+Brakedisc Front,AluminiumBrushed,500
+Brakedisc Rear,AluminiumBrushed,500
+Glass 40% transparent 3mm,Glass,500
+Plastic red light,PlasticTransparentColor,500
+Chrome matte,Chrome,500
+Aluminium,Aluminium,500
+Glass white 1mm,Glass,500
+Glass red 3mm,PlasticTransparentColor,500
+Tire Front,Rubber,10
+Chrome,Chrome,500
+Aluminium matte,AluminiumBlack,500
+Aluminium brushed,AluminiumBrushed,500
+Glass white 3mm,Glass,500
+Plastic grey light structured,PlasticOpaque,500
