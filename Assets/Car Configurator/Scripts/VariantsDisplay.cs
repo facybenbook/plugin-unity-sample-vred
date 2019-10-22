@@ -51,6 +51,7 @@ public class VariantsDisplay : MonoBehaviour {
 
             var name = switchObject.GetFieldValue<string>("name");
             List<U> variants = switchObject.GetFieldValue<List<U>>("variants");
+            if (variants.Count == 0) continue;
 
             GameObject subContent = CreateSubContent(tranformSubContent, variantsContent, -offset, name);
             subContent.name = name;
